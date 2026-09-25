@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="gu" dir="rtl">
+<html lang="ur" dir="rtl">
 
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Arabic Sarf & Nahw</title>
+<title>Arabic Sarf & Nahw - Mr Aadil Patel</title>
 
 <style>
 
@@ -28,6 +28,15 @@ body{
 h1{
     text-align:center;
     color:#176b4d;
+    margin-bottom:5px;
+}
+
+.name{
+    text-align:center;
+    color:#176b4d;
+    font-size:20px;
+    font-weight:bold;
+    margin-bottom:25px;
 }
 
 .search{
@@ -86,6 +95,13 @@ button:hover{
     padding:20px;
 }
 
+footer{
+    text-align:center;
+    margin-top:30px;
+    color:#176b4d;
+    font-weight:bold;
+}
+
 </style>
 </head>
 
@@ -95,6 +111,11 @@ button:hover{
 <div class="container">
 
 <h1>📚 Arabic Sarf & Nahw</h1>
+
+<div class="name">
+Mr Aadil Patel
+</div>
+
 
 <div class="search">
 
@@ -108,7 +129,13 @@ placeholder="عربی لفظ لکھیں"
 
 </div>
 
+
 <div id="result"></div>
+
+
+<footer>
+Created by Mr Aadil Patel © 2026
+</footer>
 
 </div>
 
@@ -120,27 +147,16 @@ const words = {
 "نصر":{
 
 فعل:"نَصَرَ",
-
-معنی:"مدد کرنا / મદદ કરવી",
-
+معنی:"مدد کرنا / مدد કરવી",
 باب:"نَصَرَ يَنْصُرُ",
-
 مصدر:"نَصْرٌ",
-
 ماضی_معروف:"نَصَرَ",
-
 ماضی_مجہول:"نُصِرَ",
-
 مضارع_معروف:"يَنْصُرُ",
-
 مضارع_مجہول:"يُنْصَرُ",
-
 امر:"اُنْصُرْ",
-
 نہی:"لَا تَنْصُرْ",
-
 فاعل:"نَاصِرٌ",
-
 مفعول:"مَنْصُورٌ"
 
 },
@@ -149,27 +165,16 @@ const words = {
 "ضرب":{
 
 فعل:"ضَرَبَ",
-
 معنی:"مارنا / મારવું",
-
 باب:"ضَرَبَ يَضْرِبُ",
-
 مصدر:"ضَرْبٌ",
-
 ماضی_معروف:"ضَرَبَ",
-
 ماضی_مجہول:"ضُرِبَ",
-
 مضارع_معروف:"يَضْرِبُ",
-
 مضارع_مجہول:"يُضْرَبُ",
-
 امر:"اِضْرِبْ",
-
 نہی:"لَا تَضْرِبْ",
-
 فاعل:"ضَارِبٌ",
-
 مفعول:"مَضْرُوبٌ"
 
 },
@@ -178,27 +183,16 @@ const words = {
 "سمع":{
 
 فعل:"سَمِعَ",
-
 معنی:"سننا / સાંભળવું",
-
 باب:"سَمِعَ يَسْمَعُ",
-
 مصدر:"سَمَاعٌ",
-
 ماضی_معروف:"سَمِعَ",
-
 ماضی_مجہول:"سُمِعَ",
-
 مضارع_معروف:"يَسْمَعُ",
-
 مضارع_مجہول:"يُسْمَعُ",
-
 امر:"اِسْمَعْ",
-
 نہی:"لَا تَسْمَعْ",
-
 فاعل:"سَامِعٌ",
-
 مفعول:"مَسْمُوعٌ"
 
 },
@@ -207,27 +201,16 @@ const words = {
 "فتح":{
 
 فعل:"فَتَحَ",
-
 معنی:"کھولنا / ખોલવું",
-
 باب:"فَتَحَ يَفْتَحُ",
-
 مصدر:"فَتْحٌ",
-
 ماضی_معروف:"فَتَحَ",
-
 ماضی_مجہول:"فُتِحَ",
-
 مضارع_معروف:"يَفْتَحُ",
-
 مضارع_مجہول:"يُفْتَحُ",
-
 امر:"اِفْتَحْ",
-
 نہی:"لَا تَفْتَحْ",
-
 فاعل:"فَاتِحٌ",
-
 مفعول:"مَفْتُوحٌ"
 
 },
@@ -236,27 +219,16 @@ const words = {
 "كرم":{
 
 فعل:"كَرُمَ",
-
 معنی:"معزز ہونا / ઉદાર થવું",
-
 باب:"كَرُمَ يَكْرُمُ",
-
 مصدر:"كَرَمٌ",
-
 ماضی_معروف:"كَرُمَ",
-
 ماضی_مجہول:"كُرِمَ",
-
 مضارع_معروف:"يَكْرُمُ",
-
 مضارع_مجہول:"يُكْرَمُ",
-
 امر:"اُكْرُمْ",
-
 نہی:"لَا تَكْرُمْ",
-
 فاعل:"كَرِيمٌ",
-
 مفعول:"مُكْرَمٌ"
 
 },
@@ -265,27 +237,16 @@ const words = {
 "حسب":{
 
 فعل:"حَسِبَ",
-
 معنی:"گمان کرنا / માનવું",
-
 باب:"حَسِبَ يَحْسَبُ",
-
 مصدر:"حِسْبَانٌ",
-
 ماضی_معروف:"حَسِبَ",
-
 ماضی_مجہول:"حُسِبَ",
-
 مضارع_معروف:"يَحْسَبُ",
-
 مضارع_مجہول:"يُحْسَبُ",
-
 امر:"اِحْسَبْ",
-
 نہی:"لَا تَحْسَبْ",
-
 فاعل:"حَاسِبٌ",
-
 مفعول:"مَحْسُوبٌ"
 
 }
@@ -313,66 +274,55 @@ result.innerHTML=`
 <div class="arabic">${w.فعل}</div>
 </div>
 
-
 <div class="card">
 <div class="label">معنی</div>
 <div class="arabic">${w.معنی}</div>
 </div>
-
 
 <div class="card">
 <div class="label">باب</div>
 <div class="arabic">${w.باب}</div>
 </div>
 
-
 <div class="card">
 <div class="label">مصدر</div>
 <div class="arabic">${w.مصدر}</div>
 </div>
-
 
 <div class="card">
 <div class="label">ماضی معروف</div>
 <div class="arabic">${w.ماضی_معروف}</div>
 </div>
 
-
 <div class="card">
 <div class="label">ماضی مجہول</div>
 <div class="arabic">${w.ماضی_مجہول}</div>
 </div>
-
 
 <div class="card">
 <div class="label">مضارع معروف</div>
 <div class="arabic">${w.مضارع_معروف}</div>
 </div>
 
-
 <div class="card">
 <div class="label">مضارع مجہول</div>
 <div class="arabic">${w.مضارع_مجہول}</div>
 </div>
-
 
 <div class="card">
 <div class="label">امر</div>
 <div class="arabic">${w.امر}</div>
 </div>
 
-
 <div class="card">
 <div class="label">نہی</div>
 <div class="arabic">${w.نہی}</div>
 </div>
 
-
 <div class="card">
 <div class="label">فاعل</div>
 <div class="arabic">${w.فاعل}</div>
 </div>
-
 
 <div class="card">
 <div class="label">مفعول</div>
@@ -382,7 +332,6 @@ result.innerHTML=`
 `;
 
 }
-
 
 else{
 
