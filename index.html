@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="ur" dir="rtl">
+<html lang="gu" dir="rtl">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,77 +8,87 @@
 <title>Arabic Sarf & Nahw</title>
 
 <style>
+
 body{
-  font-family:Arial,sans-serif;
-  background:#f2f5f7;
-  margin:0;
-  padding:20px;
+    font-family:Arial,sans-serif;
+    background:#f2f5f7;
+    margin:0;
+    padding:20px;
 }
 
 .container{
-  max-width:700px;
-  margin:auto;
-  background:white;
-  padding:20px;
-  border-radius:15px;
-  box-shadow:0 3px 15px #ccc;
+    max-width:750px;
+    margin:auto;
+    background:white;
+    padding:20px;
+    border-radius:15px;
+    box-shadow:0 3px 15px #ccc;
 }
 
 h1{
-  text-align:center;
-  color:#176b4d;
+    text-align:center;
+    color:#176b4d;
 }
 
 .search{
-  display:flex;
-  gap:10px;
+    display:flex;
+    gap:10px;
+    direction:rtl;
 }
 
 input{
-  flex:1;
-  padding:14px;
-  font-size:20px;
-  border:1px solid #bbb;
-  border-radius:10px;
+    flex:1;
+    padding:14px;
+    font-size:22px;
+    border:1px solid #bbb;
+    border-radius:10px;
 }
 
 button{
-  padding:12px 20px;
-  background:#176b4d;
-  color:white;
-  border:0;
-  border-radius:10px;
-  font-size:18px;
-  cursor:pointer;
+    padding:12px 20px;
+    background:#176b4d;
+    color:white;
+    border:0;
+    border-radius:10px;
+    font-size:18px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#0f5139;
 }
 
 .card{
-  background:#f7faf8;
-  border-right:5px solid #176b4d;
-  padding:15px;
-  margin:10px 0;
-  border-radius:10px;
+    background:#f7faf8;
+    border-right:5px solid #176b4d;
+    padding:15px;
+    margin:10px 0;
+    border-radius:10px;
 }
 
 .label{
-  font-weight:bold;
-  color:#444;
+    font-weight:bold;
+    color:#444;
+    font-size:18px;
 }
 
 .arabic{
-  font-size:28px;
-  font-weight:bold;
-  color:#176b4d;
+    font-size:28px;
+    font-weight:bold;
+    color:#176b4d;
+    margin-top:5px;
 }
 
 .notfound{
-  text-align:center;
-  color:red;
-  font-size:20px;
-  padding:20px;
+    text-align:center;
+    color:red;
+    font-size:20px;
+    padding:20px;
 }
+
 </style>
 </head>
+
 
 <body>
 
@@ -87,7 +98,11 @@ button{
 
 <div class="search">
 
-<input id="searchBox" type="text" placeholder="عربی لفظ لکھیں">
+<input
+id="searchBox"
+type="text"
+placeholder="عربی لفظ لکھیں"
+>
 
 <button onclick="searchWord()">تلاش</button>
 
@@ -103,69 +118,176 @@ button{
 const words = {
 
 "نصر":{
+
 فعل:"نَصَرَ",
+
 معنی:"مدد کرنا / મદદ કરવી",
+
 باب:"نَصَرَ يَنْصُرُ",
+
 مصدر:"نَصْرٌ",
+
+ماضی_معروف:"نَصَرَ",
+
+ماضی_مجہول:"نُصِرَ",
+
+مضارع_معروف:"يَنْصُرُ",
+
+مضارع_مجہول:"يُنْصَرُ",
+
 امر:"اُنْصُرْ",
+
 نہی:"لَا تَنْصُرْ",
+
 فاعل:"نَاصِرٌ",
+
 مفعول:"مَنْصُورٌ"
+
 },
+
 
 "ضرب":{
+
 فعل:"ضَرَبَ",
+
 معنی:"مارنا / મારવું",
+
 باب:"ضَرَبَ يَضْرِبُ",
+
 مصدر:"ضَرْبٌ",
+
+ماضی_معروف:"ضَرَبَ",
+
+ماضی_مجہول:"ضُرِبَ",
+
+مضارع_معروف:"يَضْرِبُ",
+
+مضارع_مجہول:"يُضْرَبُ",
+
 امر:"اِضْرِبْ",
+
 نہی:"لَا تَضْرِبْ",
+
 فاعل:"ضَارِبٌ",
+
 مفعول:"مَضْرُوبٌ"
+
 },
+
 
 "سمع":{
+
 فعل:"سَمِعَ",
+
 معنی:"سننا / સાંભળવું",
+
 باب:"سَمِعَ يَسْمَعُ",
+
 مصدر:"سَمَاعٌ",
+
+ماضی_معروف:"سَمِعَ",
+
+ماضی_مجہول:"سُمِعَ",
+
+مضارع_معروف:"يَسْمَعُ",
+
+مضارع_مجہول:"يُسْمَعُ",
+
 امر:"اِسْمَعْ",
+
 نہی:"لَا تَسْمَعْ",
+
 فاعل:"سَامِعٌ",
+
 مفعول:"مَسْمُوعٌ"
+
 },
+
 
 "فتح":{
+
 فعل:"فَتَحَ",
+
 معنی:"کھولنا / ખોલવું",
+
 باب:"فَتَحَ يَفْتَحُ",
+
 مصدر:"فَتْحٌ",
+
+ماضی_معروف:"فَتَحَ",
+
+ماضی_مجہول:"فُتِحَ",
+
+مضارع_معروف:"يَفْتَحُ",
+
+مضارع_مجہول:"يُفْتَحُ",
+
 امر:"اِفْتَحْ",
+
 نہی:"لَا تَفْتَحْ",
+
 فاعل:"فَاتِحٌ",
+
 مفعول:"مَفْتُوحٌ"
+
 },
+
 
 "كرم":{
+
 فعل:"كَرُمَ",
+
 معنی:"معزز ہونا / ઉદાર થવું",
+
 باب:"كَرُمَ يَكْرُمُ",
+
 مصدر:"كَرَمٌ",
+
+ماضی_معروف:"كَرُمَ",
+
+ماضی_مجہول:"كُرِمَ",
+
+مضارع_معروف:"يَكْرُمُ",
+
+مضارع_مجہول:"يُكْرَمُ",
+
 امر:"اُكْرُمْ",
+
 نہی:"لَا تَكْرُمْ",
+
 فاعل:"كَرِيمٌ",
-مفعول:"—"
+
+مفعول:"مُكْرَمٌ"
+
 },
 
+
 "حسب":{
+
 فعل:"حَسِبَ",
+
 معنی:"گمان کرنا / માનવું",
+
 باب:"حَسِبَ يَحْسَبُ",
+
 مصدر:"حِسْبَانٌ",
+
+ماضی_معروف:"حَسِبَ",
+
+ماضی_مجہول:"حُسِبَ",
+
+مضارع_معروف:"يَحْسَبُ",
+
+مضارع_مجہول:"يُحْسَبُ",
+
 امر:"اِحْسَبْ",
+
 نہی:"لَا تَحْسَبْ",
+
 فاعل:"حَاسِبٌ",
+
 مفعول:"مَحْسُوبٌ"
+
 }
 
 };
@@ -173,9 +295,12 @@ const words = {
 
 function searchWord(){
 
-let word=document.getElementById("searchBox").value.trim();
+let word =
+document.getElementById("searchBox").value.trim();
 
-let result=document.getElementById("result");
+let result =
+document.getElementById("result");
+
 
 if(words[word]){
 
@@ -188,51 +313,89 @@ result.innerHTML=`
 <div class="arabic">${w.فعل}</div>
 </div>
 
+
 <div class="card">
 <div class="label">معنی</div>
-${w.معنی}
+<div class="arabic">${w.معنی}</div>
 </div>
+
 
 <div class="card">
 <div class="label">باب</div>
-${w.باب}
+<div class="arabic">${w.باب}</div>
 </div>
+
 
 <div class="card">
 <div class="label">مصدر</div>
-${w.مصدر}
+<div class="arabic">${w.مصدر}</div>
 </div>
+
+
+<div class="card">
+<div class="label">ماضی معروف</div>
+<div class="arabic">${w.ماضی_معروف}</div>
+</div>
+
+
+<div class="card">
+<div class="label">ماضی مجہول</div>
+<div class="arabic">${w.ماضی_مجہول}</div>
+</div>
+
+
+<div class="card">
+<div class="label">مضارع معروف</div>
+<div class="arabic">${w.مضارع_معروف}</div>
+</div>
+
+
+<div class="card">
+<div class="label">مضارع مجہول</div>
+<div class="arabic">${w.مضارع_مجہول}</div>
+</div>
+
 
 <div class="card">
 <div class="label">امر</div>
-${w.امر}
+<div class="arabic">${w.امر}</div>
 </div>
+
 
 <div class="card">
 <div class="label">نہی</div>
-${w.نہی}
+<div class="arabic">${w.نہی}</div>
 </div>
+
 
 <div class="card">
 <div class="label">فاعل</div>
-${w.فاعل}
+<div class="arabic">${w.فاعل}</div>
 </div>
+
 
 <div class="card">
 <div class="label">مفعول</div>
-${w.مفعول}
+<div class="arabic">${w.مفعول}</div>
 </div>
 
 `;
 
-}else{
+}
+
+
+else{
 
 result.innerHTML=`
 
 <div class="notfound">
+
 معلومات نہیں ملی
+
 <br>
+
 لفظ ابھی database میں موجود نہیں ہے۔
+
 </div>
 
 `;
