@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="gu">
+<html lang="gu" dir="ltr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,114 +7,239 @@
 <title>Arabic Sarf & Nahw AI</title>
 
 <style>
+* {
+    box-sizing: border-box;
+}
+
 body {
-    font-family: Arial, sans-serif;
-    background: #f5f7fa;
     margin: 0;
-    padding: 20px;
+    font-family: Arial, sans-serif;
+    background: #f3f6f8;
+    color: #222;
+}
+
+header {
+    background: #075e54;
+    color: white;
     text-align: center;
+    padding: 25px 15px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 30px;
+}
+
+header p {
+    margin-top: 8px;
 }
 
 .container {
-    max-width: 700px;
-    margin: auto;
+    max-width: 850px;
+    margin: 25px auto;
+    padding: 15px;
+}
+
+.search-box {
     background: white;
     padding: 25px;
-    border-radius: 15px;
+    border-radius: 18px;
+    box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+    text-align: center;
 }
 
-h1 {
-    color: #075e54;
-}
-
-input {
+.search-box input {
     width: 80%;
     padding: 15px;
-    font-size: 22px;
+    font-size: 25px;
     text-align: right;
-    border: 1px solid #ccc;
-    border-radius: 10px;
+    direction: rtl;
+    border: 2px solid #ddd;
+    border-radius: 12px;
 }
 
-button {
+.search-box button {
     margin-top: 15px;
-    padding: 12px 30px;
-    font-size: 18px;
+    padding: 13px 30px;
     border: none;
     border-radius: 10px;
     background: #075e54;
     color: white;
+    font-size: 18px;
     cursor: pointer;
 }
 
-#result {
+.search-box button:hover {
+    background: #064c44;
+}
+
+.result {
     margin-top: 25px;
-    text-align: right;
-    direction: rtl;
 }
 
 .card {
-    background: #f1f8f6;
-    padding: 15px;
-    margin-top: 15px;
-    border-radius: 10px;
+    background: white;
+    margin-bottom: 18px;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.07);
 }
 
+.card h2 {
+    color: #075e54;
+    margin-top: 0;
+}
+
+.arabic {
+    direction: rtl;
+    text-align: right;
+    font-size: 23px;
+}
+
+.row {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.label {
+    font-weight: bold;
+}
+
+footer {
+    text-align: center;
+    padding: 25px;
+    color: #666;
+}
 </style>
 </head>
 
 <body>
 
+<header>
+    <h1>📚 Arabic Sarf & Nahw AI</h1>
+    <p>صرف، نحو، معنی اور عربی لفظ کی مکمل تحقیق</p>
+</header>
+
 <div class="container">
 
-<h1>📚 Arabic Sarf & Nahw AI</h1>
+    <div class="search-box">
 
-<p>عربی لفظ لکھیں</p>
+        <h2>عربی لفظ تلاش کریں</h2>
 
-<input id="word" type="text" placeholder="مثلاً: كتب">
+        <input
+            id="word"
+            type="text"
+            placeholder="مثلاً: كَتَبَ"
+        >
 
-<br>
+        <br>
 
-<button onclick="analyzeWord()">تحلیل کریں</button>
-
-<div id="result"></div>
-
-</div>
-
-<script>
-
-function analyzeWord() {
-
-    let word = document.getElementById("word").value.trim();
-
-    if (word === "") {
-        document.getElementById("result").innerHTML =
-        "<p>براہ کرم عربی لفظ لکھیں۔</p>";
-        return;
-    }
-
-    document.getElementById("result").innerHTML = `
-    
-    <div class="card">
-
-    <h2>لفظ: ${word}</h2>
-
-    <h3>🔹 قسم</h3>
-    <p>AI یہاں فعل، اسم یا حرف کی شناخت کرے گا۔</p>
-
-    <h3>🔹 صرف</h3>
-    <p>ماضی، مضارع، مصدر، امر، نہی، معروف، مجہول، فاعل، مفعول وغیرہ</p>
-
-    <h3>🔹 نحو</h3>
-    <p>اعراب، ترکیب، متعلق، جملے میں مقام وغیرہ</p>
-
-    <h3>🔹 معنی</h3>
-    <p>اردو، گجراتی اور English معنی</p>
+        <button onclick="searchWord()">
+            🔍 Search
+        </button>
 
     </div>
 
-    `;
+    <div id="result" class="result"></div>
 
+</div>
+
+<footer>
+    Arabic Sarf & Nahw AI
+</footer>
+
+<script>
+
+function searchWord() {
+
+    const word = document.getElementById("word").value.trim();
+    const result = document.getElementById("result");
+
+    if (word === "") {
+        result.innerHTML = `
+            <div class="card">
+                <h2>⚠️ لفظ لکھیں</h2>
+                <p>براہ کرم پہلے کوئی عربی لفظ لکھیں۔</p>
+            </div>
+        `;
+        return;
+    }
+
+    result.innerHTML = `
+
+        <div class="card arabic">
+            <h2>🔎 لفظ</h2>
+            <h1>${word}</h1>
+        </div>
+
+        <div class="card arabic">
+            <h2>📌 قسمِ کلمہ</h2>
+
+            <div class="row">
+                <span class="label">قسم:</span>
+                AI خود شناخت کرے گا
+            </div>
+
+            <div class="row">
+                <span class="label">مادہ:</span>
+                AI خود معلوم کرے گا
+            </div>
+        </div>
+
+        <div class="card arabic">
+            <h2>🔵 فعل — صرف</h2>
+
+            <div class="row">ماضی: —</div>
+            <div class="row">مضارع: —</div>
+            <div class="row">مصدر: —</div>
+            <div class="row">باب: —</div>
+            <div class="row">امر: —</div>
+            <div class="row">نہی: —</div>
+            <div class="row">معروف: —</div>
+            <div class="row">مجہول: —</div>
+            <div class="row">اسم فاعل: —</div>
+            <div class="row">اسم مفعول: —</div>
+            <div class="row">اسم تفضیل: —</div>
+            <div class="row">ظرف: —</div>
+            <div class="row">اسم آلہ: —</div>
+        </div>
+
+        <div class="card arabic">
+            <h2>🟢 اسم — نحو</h2>
+
+            <div class="row">واحد: —</div>
+            <div class="row">تثنیہ: —</div>
+            <div class="row">جمع: —</div>
+            <div class="row">مذکر / مؤنث: —</div>
+            <div class="row">معرفہ / نکرہ: —</div>
+            <div class="row">معرب / مبنی: —</div>
+            <div class="row">مادہ: —</div>
+        </div>
+
+        <div class="card arabic">
+            <h2>🟠 حرف</h2>
+
+            <div class="row">قسمِ حرف: —</div>
+            <div class="row">معنی: —</div>
+            <div class="row">استعمال: —</div>
+            <div class="row">متعلق: —</div>
+            <div class="row">اعراب: —</div>
+        </div>
+
+        <div class="card arabic">
+            <h2>🌐 معنی</h2>
+
+            <div class="row">اردو: —</div>
+            <div class="row">ગુજરાતી: —</div>
+            <div class="row">English: —</div>
+        </div>
+
+        <div class="card arabic">
+            <h2>📖 مثال</h2>
+            <p>AI یہاں عربی جملہ اور اس کی نحوی وضاحت دے گا۔</p>
+        </div>
+
+    `;
 }
 
 </script>
