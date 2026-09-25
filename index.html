@@ -1,98 +1,95 @@
 <!DOCTYPE html>
-<html lang="gu">
+<html lang="ur" dir="rtl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Arabic Sarf & Nahw</title>
 
 <style>
 body{
-    margin:0;
-    font-family:Arial,sans-serif;
-    background:#f3f6f8;
+  font-family:Arial,sans-serif;
+  background:#f2f5f7;
+  margin:0;
+  padding:20px;
 }
-header{
-    background:#075e54;
-    color:white;
-    text-align:center;
-    padding:25px 10px;
-}
+
 .container{
-    max-width:850px;
-    margin:25px auto;
-    padding:15px;
+  max-width:700px;
+  margin:auto;
+  background:white;
+  padding:20px;
+  border-radius:15px;
+  box-shadow:0 3px 15px #ccc;
 }
+
+h1{
+  text-align:center;
+  color:#176b4d;
+}
+
 .search{
-    background:white;
-    padding:25px;
-    border-radius:18px;
-    text-align:center;
+  display:flex;
+  gap:10px;
 }
+
 input{
-    width:80%;
-    padding:15px;
-    font-size:25px;
-    direction:rtl;
-    text-align:right;
-    border:2px solid #ddd;
-    border-radius:12px;
+  flex:1;
+  padding:14px;
+  font-size:20px;
+  border:1px solid #bbb;
+  border-radius:10px;
 }
+
 button{
-    margin-top:15px;
-    padding:13px 30px;
-    font-size:18px;
-    border:0;
-    border-radius:10px;
-    background:#075e54;
-    color:white;
+  padding:12px 20px;
+  background:#176b4d;
+  color:white;
+  border:0;
+  border-radius:10px;
+  font-size:18px;
+  cursor:pointer;
 }
+
 .card{
-    background:white;
-    margin-top:20px;
-    padding:20px;
-    border-radius:15px;
-    direction:rtl;
-    text-align:right;
+  background:#f7faf8;
+  border-right:5px solid #176b4d;
+  padding:15px;
+  margin:10px 0;
+  border-radius:10px;
 }
-.card h2{
-    color:#075e54;
+
+.label{
+  font-weight:bold;
+  color:#444;
 }
-.row{
-    padding:10px;
-    border-bottom:1px solid #eee;
-    font-size:18px;
-}
+
 .arabic{
-    font-size:24px;
+  font-size:28px;
+  font-weight:bold;
+  color:#176b4d;
 }
-.badge{
-    display:inline-block;
-    background:#075e54;
-    color:white;
-    padding:8px 15px;
-    border-radius:20px;
+
+.notfound{
+  text-align:center;
+  color:red;
+  font-size:20px;
+  padding:20px;
 }
 </style>
 </head>
 
 <body>
 
-<header>
-<h1>📚 Arabic Sarf & Nahw</h1>
-<p>صرف و نحو کی مکمل تحقیق</p>
-</header>
-
 <div class="container">
+
+<h1>📚 Arabic Sarf & Nahw</h1>
 
 <div class="search">
 
-<h2>عربی لفظ تلاش کریں</h2>
+<input id="searchBox" type="text" placeholder="عربی لفظ لکھیں">
 
-<input id="word" placeholder="مثلاً: كتب">
-
-<br>
-
-<button onclick="searchWord()">🔍 Search</button>
+<button onclick="searchWord()">تلاش</button>
 
 </div>
 
@@ -100,42 +97,75 @@ button{
 
 </div>
 
+
 <script>
 
-const data = {
+const words = {
 
-"كتب":{
-type:"فعل",
-meaning:"لکھنا",
-root:"ك ت ب",
-past:"كَتَبَ",
-present:"يَكْتُبُ",
-masdar:"كِتَابَةٌ",
-amr:"اُكْتُبْ",
-nahy:"لَا تَكْتُبْ",
-bab:"نَصَرَ يَنْصُرُ",
-active:"كَاتِبٌ",
-passive:"مَكْتُوبٌ"
+"نصر":{
+فعل:"نَصَرَ",
+معنی:"مدد کرنا / મદદ કરવી",
+باب:"نَصَرَ يَنْصُرُ",
+مصدر:"نَصْرٌ",
+امر:"اُنْصُرْ",
+نہی:"لَا تَنْصُرْ",
+فاعل:"نَاصِرٌ",
+مفعول:"مَنْصُورٌ"
 },
 
-"كتاب":{
-type:"اسم",
-meaning:"کتاب",
-root:"ك ت ب",
-singular:"كِتَابٌ",
-dual:"كِتَابَانِ",
-plural:"كُتُبٌ",
-gender:"مذکر",
-definite:"معرفہ",
-declension:"معرب"
+"ضرب":{
+فعل:"ضَرَبَ",
+معنی:"مارنا / મારવું",
+باب:"ضَرَبَ يَضْرِبُ",
+مصدر:"ضَرْبٌ",
+امر:"اِضْرِبْ",
+نہی:"لَا تَضْرِبْ",
+فاعل:"ضَارِبٌ",
+مفعول:"مَضْرُوبٌ"
 },
 
-"من":{
-type:"حرف",
-meaning:"سے / میں سے",
-category:"حرفِ جر",
-usage:"اسم کو مجرور کرتا ہے",
-example:"ذَهَبْتُ مِنَ الْبَيْتِ"
+"سمع":{
+فعل:"سَمِعَ",
+معنی:"سننا / સાંભળવું",
+باب:"سَمِعَ يَسْمَعُ",
+مصدر:"سَمَاعٌ",
+امر:"اِسْمَعْ",
+نہی:"لَا تَسْمَعْ",
+فاعل:"سَامِعٌ",
+مفعول:"مَسْمُوعٌ"
+},
+
+"فتح":{
+فعل:"فَتَحَ",
+معنی:"کھولنا / ખોલવું",
+باب:"فَتَحَ يَفْتَحُ",
+مصدر:"فَتْحٌ",
+امر:"اِفْتَحْ",
+نہی:"لَا تَفْتَحْ",
+فاعل:"فَاتِحٌ",
+مفعول:"مَفْتُوحٌ"
+},
+
+"كرم":{
+فعل:"كَرُمَ",
+معنی:"معزز ہونا / ઉદાર થવું",
+باب:"كَرُمَ يَكْرُمُ",
+مصدر:"كَرَمٌ",
+امر:"اُكْرُمْ",
+نہی:"لَا تَكْرُمْ",
+فاعل:"كَرِيمٌ",
+مفعول:"—"
+},
+
+"حسب":{
+فعل:"حَسِبَ",
+معنی:"گمان کرنا / માનવું",
+باب:"حَسِبَ يَحْسَبُ",
+مصدر:"حِسْبَانٌ",
+امر:"اِحْسَبْ",
+نہی:"لَا تَحْسَبْ",
+فاعل:"حَاسِبٌ",
+مفعول:"مَحْسُوبٌ"
 }
 
 };
@@ -143,112 +173,71 @@ example:"ذَهَبْتُ مِنَ الْبَيْتِ"
 
 function searchWord(){
 
-let word=document.getElementById("word").value.trim();
+let word=document.getElementById("searchBox").value.trim();
 
 let result=document.getElementById("result");
 
-if(word===""){
-result.innerHTML="<div class='card'>براہ کرم عربی لفظ لکھیں۔</div>";
-return;
-}
+if(words[word]){
 
-let key=word.replace(/[ًٌٍَُِّْـ]/g,"");
-
-let item=data[key];
-
-if(!item){
+let w=words[word];
 
 result.innerHTML=`
 
 <div class="card">
-
-<h2>لفظ: ${word}</h2>
-
-<p class="badge">معلومات نہیں ملی</p>
-
-<h3>🤖 AI Analysis</h3>
-
-<p>
-یہاں مستقبل میں AI خود اس لفظ کو
-فعل، اسم یا حرف کے طور پر شناخت کرے گا
-اور مکمل صرف و نحو کی معلومات دے گا۔
-</p>
-
+<div class="label">فعل</div>
+<div class="arabic">${w.فعل}</div>
 </div>
-
-`;
-
-return;
-}
-
-
-let html=`
 
 <div class="card">
-
-<h2>🔎 لفظ</h2>
-<div class="arabic">${word}</div>
-
-<h2>📌 قسمِ کلمہ</h2>
-<p class="badge">${item.type}</p>
-
-<div class="row"><b>معنی:</b> ${item.meaning}</div>
-
-`;
-
-if(item.root)
-html+=`<div class="row"><b>مادہ:</b> ${item.root}</div>`;
-
-if(item.past)
-html+=`
-
-<h2>🔵 صرف</h2>
-
-<div class="row"><b>ماضی:</b> ${item.past}</div>
-<div class="row"><b>مضارع:</b> ${item.present}</div>
-<div class="row"><b>مصدر:</b> ${item.masdar}</div>
-<div class="row"><b>باب:</b> ${item.bab}</div>
-<div class="row"><b>امر:</b> ${item.amr}</div>
-<div class="row"><b>نہی:</b> ${item.nahy}</div>
-<div class="row"><b>اسم فاعل:</b> ${item.active}</div>
-<div class="row"><b>اسم مفعول:</b> ${item.passive}</div>
-`;
-
-if(item.singular)
-html+=`
-
-<h2>🟢 اسم</h2>
-
-<div class="row"><b>واحد:</b> ${item.singular}</div>
-<div class="row"><b>تثنیہ:</b> ${item.dual}</div>
-<div class="row"><b>جمع:</b> ${item.plural}</div>
-<div class="row"><b>جنس:</b> ${item.gender}</div>
-<div class="row"><b>معرفہ/نکرہ:</b> ${item.definite}</div>
-<div class="row"><b>معرب/مبنی:</b> ${item.declension}</div>
-`;
-
-if(item.category)
-html+=`
-
-<h2>🟠 حرف</h2>
-
-<div class="row"><b>قسم:</b> ${item.category}</div>
-<div class="row"><b>استعمال:</b> ${item.usage}</div>
-<div class="row"><b>مثال:</b> ${item.example}</div>
-`;
-
-html+=`
-
-<h2>🌐 Languages</h2>
-
-<div class="row"><b>اردو:</b> ${item.meaning}</div>
-<div class="row"><b>ગુજરાતી:</b> ${item.meaning}</div>
-<div class="row"><b>English:</b> ${item.meaning}</div>
-
+<div class="label">معنی</div>
+${w.معنی}
 </div>
+
+<div class="card">
+<div class="label">باب</div>
+${w.باب}
+</div>
+
+<div class="card">
+<div class="label">مصدر</div>
+${w.مصدر}
+</div>
+
+<div class="card">
+<div class="label">امر</div>
+${w.امر}
+</div>
+
+<div class="card">
+<div class="label">نہی</div>
+${w.نہی}
+</div>
+
+<div class="card">
+<div class="label">فاعل</div>
+${w.فاعل}
+</div>
+
+<div class="card">
+<div class="label">مفعول</div>
+${w.مفعول}
+</div>
+
 `;
 
-result.innerHTML=html;
+}else{
+
+result.innerHTML=`
+
+<div class="notfound">
+معلومات نہیں ملی
+<br>
+لفظ ابھی database میں موجود نہیں ہے۔
+</div>
+
+`;
+
+}
 
 }
 
