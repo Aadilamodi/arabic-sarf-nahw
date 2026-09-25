@@ -1,114 +1,76 @@
 <!DOCTYPE html>
-<html lang="gu" dir="ltr">
+<html lang="gu">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Arabic Sarf & Nahw AI</title>
+<title>Arabic Sarf & Nahw</title>
 
 <style>
-* {
-    box-sizing: border-box;
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#f3f6f8;
 }
-
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #f3f6f8;
-    color: #222;
+header{
+    background:#075e54;
+    color:white;
+    text-align:center;
+    padding:25px 10px;
 }
-
-header {
-    background: #075e54;
-    color: white;
-    text-align: center;
-    padding: 25px 15px;
+.container{
+    max-width:850px;
+    margin:25px auto;
+    padding:15px;
 }
-
-header h1 {
-    margin: 0;
-    font-size: 30px;
+.search{
+    background:white;
+    padding:25px;
+    border-radius:18px;
+    text-align:center;
 }
-
-header p {
-    margin-top: 8px;
+input{
+    width:80%;
+    padding:15px;
+    font-size:25px;
+    direction:rtl;
+    text-align:right;
+    border:2px solid #ddd;
+    border-radius:12px;
 }
-
-.container {
-    max-width: 850px;
-    margin: 25px auto;
-    padding: 15px;
+button{
+    margin-top:15px;
+    padding:13px 30px;
+    font-size:18px;
+    border:0;
+    border-radius:10px;
+    background:#075e54;
+    color:white;
 }
-
-.search-box {
-    background: white;
-    padding: 25px;
-    border-radius: 18px;
-    box-shadow: 0 3px 15px rgba(0,0,0,0.08);
-    text-align: center;
+.card{
+    background:white;
+    margin-top:20px;
+    padding:20px;
+    border-radius:15px;
+    direction:rtl;
+    text-align:right;
 }
-
-.search-box input {
-    width: 80%;
-    padding: 15px;
-    font-size: 25px;
-    text-align: right;
-    direction: rtl;
-    border: 2px solid #ddd;
-    border-radius: 12px;
+.card h2{
+    color:#075e54;
 }
-
-.search-box button {
-    margin-top: 15px;
-    padding: 13px 30px;
-    border: none;
-    border-radius: 10px;
-    background: #075e54;
-    color: white;
-    font-size: 18px;
-    cursor: pointer;
+.row{
+    padding:10px;
+    border-bottom:1px solid #eee;
+    font-size:18px;
 }
-
-.search-box button:hover {
-    background: #064c44;
+.arabic{
+    font-size:24px;
 }
-
-.result {
-    margin-top: 25px;
-}
-
-.card {
-    background: white;
-    margin-bottom: 18px;
-    padding: 20px;
-    border-radius: 15px;
-    box-shadow: 0 3px 12px rgba(0,0,0,0.07);
-}
-
-.card h2 {
-    color: #075e54;
-    margin-top: 0;
-}
-
-.arabic {
-    direction: rtl;
-    text-align: right;
-    font-size: 23px;
-}
-
-.row {
-    padding: 10px;
-    border-bottom: 1px solid #eee;
-}
-
-.label {
-    font-weight: bold;
-}
-
-footer {
-    text-align: center;
-    padding: 25px;
-    color: #666;
+.badge{
+    display:inline-block;
+    background:#075e54;
+    color:white;
+    padding:8px 15px;
+    border-radius:20px;
 }
 </style>
 </head>
@@ -116,130 +78,178 @@ footer {
 <body>
 
 <header>
-    <h1>📚 Arabic Sarf & Nahw AI</h1>
-    <p>صرف، نحو، معنی اور عربی لفظ کی مکمل تحقیق</p>
+<h1>📚 Arabic Sarf & Nahw</h1>
+<p>صرف و نحو کی مکمل تحقیق</p>
 </header>
 
 <div class="container">
 
-    <div class="search-box">
+<div class="search">
 
-        <h2>عربی لفظ تلاش کریں</h2>
+<h2>عربی لفظ تلاش کریں</h2>
 
-        <input
-            id="word"
-            type="text"
-            placeholder="مثلاً: كَتَبَ"
-        >
+<input id="word" placeholder="مثلاً: كتب">
 
-        <br>
+<br>
 
-        <button onclick="searchWord()">
-            🔍 Search
-        </button>
-
-    </div>
-
-    <div id="result" class="result"></div>
+<button onclick="searchWord()">🔍 Search</button>
 
 </div>
 
-<footer>
-    Arabic Sarf & Nahw AI
-</footer>
+<div id="result"></div>
+
+</div>
 
 <script>
 
-function searchWord() {
+const data = {
 
-    const word = document.getElementById("word").value.trim();
-    const result = document.getElementById("result");
+"كتب":{
+type:"فعل",
+meaning:"لکھنا",
+root:"ك ت ب",
+past:"كَتَبَ",
+present:"يَكْتُبُ",
+masdar:"كِتَابَةٌ",
+amr:"اُكْتُبْ",
+nahy:"لَا تَكْتُبْ",
+bab:"نَصَرَ يَنْصُرُ",
+active:"كَاتِبٌ",
+passive:"مَكْتُوبٌ"
+},
 
-    if (word === "") {
-        result.innerHTML = `
-            <div class="card">
-                <h2>⚠️ لفظ لکھیں</h2>
-                <p>براہ کرم پہلے کوئی عربی لفظ لکھیں۔</p>
-            </div>
-        `;
-        return;
-    }
+"كتاب":{
+type:"اسم",
+meaning:"کتاب",
+root:"ك ت ب",
+singular:"كِتَابٌ",
+dual:"كِتَابَانِ",
+plural:"كُتُبٌ",
+gender:"مذکر",
+definite:"معرفہ",
+declension:"معرب"
+},
 
-    result.innerHTML = `
+"من":{
+type:"حرف",
+meaning:"سے / میں سے",
+category:"حرفِ جر",
+usage:"اسم کو مجرور کرتا ہے",
+example:"ذَهَبْتُ مِنَ الْبَيْتِ"
+}
 
-        <div class="card arabic">
-            <h2>🔎 لفظ</h2>
-            <h1>${word}</h1>
-        </div>
+};
 
-        <div class="card arabic">
-            <h2>📌 قسمِ کلمہ</h2>
 
-            <div class="row">
-                <span class="label">قسم:</span>
-                AI خود شناخت کرے گا
-            </div>
+function searchWord(){
 
-            <div class="row">
-                <span class="label">مادہ:</span>
-                AI خود معلوم کرے گا
-            </div>
-        </div>
+let word=document.getElementById("word").value.trim();
 
-        <div class="card arabic">
-            <h2>🔵 فعل — صرف</h2>
+let result=document.getElementById("result");
 
-            <div class="row">ماضی: —</div>
-            <div class="row">مضارع: —</div>
-            <div class="row">مصدر: —</div>
-            <div class="row">باب: —</div>
-            <div class="row">امر: —</div>
-            <div class="row">نہی: —</div>
-            <div class="row">معروف: —</div>
-            <div class="row">مجہول: —</div>
-            <div class="row">اسم فاعل: —</div>
-            <div class="row">اسم مفعول: —</div>
-            <div class="row">اسم تفضیل: —</div>
-            <div class="row">ظرف: —</div>
-            <div class="row">اسم آلہ: —</div>
-        </div>
+if(word===""){
+result.innerHTML="<div class='card'>براہ کرم عربی لفظ لکھیں۔</div>";
+return;
+}
 
-        <div class="card arabic">
-            <h2>🟢 اسم — نحو</h2>
+let key=word.replace(/[ًٌٍَُِّْـ]/g,"");
 
-            <div class="row">واحد: —</div>
-            <div class="row">تثنیہ: —</div>
-            <div class="row">جمع: —</div>
-            <div class="row">مذکر / مؤنث: —</div>
-            <div class="row">معرفہ / نکرہ: —</div>
-            <div class="row">معرب / مبنی: —</div>
-            <div class="row">مادہ: —</div>
-        </div>
+let item=data[key];
 
-        <div class="card arabic">
-            <h2>🟠 حرف</h2>
+if(!item){
 
-            <div class="row">قسمِ حرف: —</div>
-            <div class="row">معنی: —</div>
-            <div class="row">استعمال: —</div>
-            <div class="row">متعلق: —</div>
-            <div class="row">اعراب: —</div>
-        </div>
+result.innerHTML=`
 
-        <div class="card arabic">
-            <h2>🌐 معنی</h2>
+<div class="card">
 
-            <div class="row">اردو: —</div>
-            <div class="row">ગુજરાતી: —</div>
-            <div class="row">English: —</div>
-        </div>
+<h2>لفظ: ${word}</h2>
 
-        <div class="card arabic">
-            <h2>📖 مثال</h2>
-            <p>AI یہاں عربی جملہ اور اس کی نحوی وضاحت دے گا۔</p>
-        </div>
+<p class="badge">معلومات نہیں ملی</p>
 
-    `;
+<h3>🤖 AI Analysis</h3>
+
+<p>
+یہاں مستقبل میں AI خود اس لفظ کو
+فعل، اسم یا حرف کے طور پر شناخت کرے گا
+اور مکمل صرف و نحو کی معلومات دے گا۔
+</p>
+
+</div>
+
+`;
+
+return;
+}
+
+
+let html=`
+
+<div class="card">
+
+<h2>🔎 لفظ</h2>
+<div class="arabic">${word}</div>
+
+<h2>📌 قسمِ کلمہ</h2>
+<p class="badge">${item.type}</p>
+
+<div class="row"><b>معنی:</b> ${item.meaning}</div>
+
+`;
+
+if(item.root)
+html+=`<div class="row"><b>مادہ:</b> ${item.root}</div>`;
+
+if(item.past)
+html+=`
+
+<h2>🔵 صرف</h2>
+
+<div class="row"><b>ماضی:</b> ${item.past}</div>
+<div class="row"><b>مضارع:</b> ${item.present}</div>
+<div class="row"><b>مصدر:</b> ${item.masdar}</div>
+<div class="row"><b>باب:</b> ${item.bab}</div>
+<div class="row"><b>امر:</b> ${item.amr}</div>
+<div class="row"><b>نہی:</b> ${item.nahy}</div>
+<div class="row"><b>اسم فاعل:</b> ${item.active}</div>
+<div class="row"><b>اسم مفعول:</b> ${item.passive}</div>
+`;
+
+if(item.singular)
+html+=`
+
+<h2>🟢 اسم</h2>
+
+<div class="row"><b>واحد:</b> ${item.singular}</div>
+<div class="row"><b>تثنیہ:</b> ${item.dual}</div>
+<div class="row"><b>جمع:</b> ${item.plural}</div>
+<div class="row"><b>جنس:</b> ${item.gender}</div>
+<div class="row"><b>معرفہ/نکرہ:</b> ${item.definite}</div>
+<div class="row"><b>معرب/مبنی:</b> ${item.declension}</div>
+`;
+
+if(item.category)
+html+=`
+
+<h2>🟠 حرف</h2>
+
+<div class="row"><b>قسم:</b> ${item.category}</div>
+<div class="row"><b>استعمال:</b> ${item.usage}</div>
+<div class="row"><b>مثال:</b> ${item.example}</div>
+`;
+
+html+=`
+
+<h2>🌐 Languages</h2>
+
+<div class="row"><b>اردو:</b> ${item.meaning}</div>
+<div class="row"><b>ગુજરાતી:</b> ${item.meaning}</div>
+<div class="row"><b>English:</b> ${item.meaning}</div>
+
+</div>
+`;
+
+result.innerHTML=html;
+
 }
 
 </script>
