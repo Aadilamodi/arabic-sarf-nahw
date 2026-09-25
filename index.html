@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Arabic Sarf & Nahw AI</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f7fa;
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+}
+
+.container {
+    max-width: 700px;
+    margin: auto;
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+}
+
+h1 {
+    color: #075e54;
+}
+
+input {
+    width: 80%;
+    padding: 15px;
+    font-size: 22px;
+    text-align: right;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+}
+
+button {
+    margin-top: 15px;
+    padding: 12px 30px;
+    font-size: 18px;
+    border: none;
+    border-radius: 10px;
+    background: #075e54;
+    color: white;
+    cursor: pointer;
+}
+
+#result {
+    margin-top: 25px;
+    text-align: right;
+    direction: rtl;
+}
+
+.card {
+    background: #f1f8f6;
+    padding: 15px;
+    margin-top: 15px;
+    border-radius: 10px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>📚 Arabic Sarf & Nahw AI</h1>
+
+<p>عربی لفظ لکھیں</p>
+
+<input id="word" type="text" placeholder="مثلاً: كتب">
+
+<br>
+
+<button onclick="analyzeWord()">تحلیل کریں</button>
+
+<div id="result"></div>
+
+</div>
+
+<script>
+
+function analyzeWord() {
+
+    let word = document.getElementById("word").value.trim();
+
+    if (word === "") {
+        document.getElementById("result").innerHTML =
+        "<p>براہ کرم عربی لفظ لکھیں۔</p>";
+        return;
+    }
+
+    document.getElementById("result").innerHTML = `
+    
+    <div class="card">
+
+    <h2>لفظ: ${word}</h2>
+
+    <h3>🔹 قسم</h3>
+    <p>AI یہاں فعل، اسم یا حرف کی شناخت کرے گا۔</p>
+
+    <h3>🔹 صرف</h3>
+    <p>ماضی، مضارع، مصدر، امر، نہی، معروف، مجہول، فاعل، مفعول وغیرہ</p>
+
+    <h3>🔹 نحو</h3>
+    <p>اعراب، ترکیب، متعلق، جملے میں مقام وغیرہ</p>
+
+    <h3>🔹 معنی</h3>
+    <p>اردو، گجراتی اور English معنی</p>
+
+    </div>
+
+    `;
+
+}
+
+</script>
+
+</body>
+</html>
